@@ -1,18 +1,30 @@
 import { Redirect, Route } from 'react-router-dom';
 import {
   IonApp,
+  IonHeader,
+  IonToolbar,
+  IonButtons,
+  IonMenuButton,
   IonIcon,
   IonLabel,
   IonRouterOutlet,
   IonTabBar,
   IonTabButton,
   IonTabs,
+  IonTitle,
+  IonMenu,
+  IonContent,
+  IonList,
+  IonMenuToggle,
+  IonItem,
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, square, triangle } from 'ionicons/icons';
-import Tab1 from './pages/Tab1';
-import Tab2 from './pages/Tab2';
-import Tab3 from './pages/Tab3';
+import { ellipse, list, square, triangle, homeOutline, calendarOutline, cashOutline, personOutline, optionsOutline } from 'ionicons/icons';
+import Home from './pages/Home';
+import Calls from './pages/Calls';
+import Expenses from './pages/Expenses';
+import Options from './pages/Options'
+import Lookup from './pages/Lookup'
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -32,37 +44,85 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import React from 'react';
 
 const App: React.FC = () => (
   <IonApp>
+    <IonMenu contentId="main">
+      <IonHeader>
+        <IonToolbar>
+          <IonTitle>CRM</IonTitle>
+        </IonToolbar>
+      </IonHeader>
+      <IonContent>
+      <IonList>
+        <IonMenuToggle>
+          <IonItem button routerLink="/">
+            <IonIcon slot="start" icon={homeOutline} />
+            <IonLabel>Home</IonLabel>
+          </IonItem>
+          <IonItem button routerLink="/calls">
+            <IonIcon slot="start" icon={calendarOutline} />
+            <IonLabel>Calls</IonLabel>
+          </IonItem>
+          <IonItem button routerLink="/expenses">
+            <IonIcon slot="start" icon={cashOutline} />
+            <IonLabel>Expenses</IonLabel>
+          </IonItem>
+          <IonItem button routerLink="/lookup">
+            <IonIcon slot="start" icon={personOutline} />
+            <IonLabel>Lookup</IonLabel>
+          </IonItem>
+          <IonItem button routerLink="/options">
+            <IonIcon slot="start" icon={optionsOutline} />
+            <IonLabel>Options</IonLabel>
+          </IonItem>
+        </IonMenuToggle>
+      </IonList>
+    </IonContent>
+    </IonMenu>
     <IonReactRouter>
       <IonTabs>
-        <IonRouterOutlet>
-          <Route exact path="/tab1">
-            <Tab1 />
+        <IonRouterOutlet id="main">
+          <Route exact path="/home">
+            <Home />
           </Route>
-          <Route exact path="/tab2">
-            <Tab2 />
+          <Route exact path="/calls">
+            <Calls />
           </Route>
-          <Route path="/tab3">
-            <Tab3 />
+          <Route path="/expenses">
+            <Expenses />
+          </Route>
+          <Route path="/lookup">
+            <Lookup />
+          </Route>
+          <Route path="/options">
+            <Options />
           </Route>
           <Route exact path="/">
-            <Redirect to="/tab1" />
+            <Redirect to="/home" />
           </Route>
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
-          <IonTabButton tab="tab1" href="/tab1">
-            <IonIcon icon={triangle} />
-            <IonLabel>Tab 1</IonLabel>
+          <IonTabButton tab="home" href="/home">
+            <IonIcon icon={homeOutline} />
+            <IonLabel>Home</IonLabel>
           </IonTabButton>
-          <IonTabButton tab="tab2" href="/tab2">
-            <IonIcon icon={ellipse} />
-            <IonLabel>Tab 2</IonLabel>
+          <IonTabButton tab="calls" href="/calls">
+            <IonIcon icon={calendarOutline} />
+            <IonLabel>Calls</IonLabel>
           </IonTabButton>
-          <IonTabButton tab="tab3" href="/tab3">
-            <IonIcon icon={square} />
-            <IonLabel>Tab 3</IonLabel>
+          <IonTabButton tab="expenses" href="/expenses">
+            <IonIcon icon={cashOutline} />
+            <IonLabel>Expenses</IonLabel>
+          </IonTabButton>
+          <IonTabButton tab="lookup" href="/lookup">
+            <IonIcon icon={personOutline} />
+            <IonLabel>Lookup</IonLabel>
+          </IonTabButton>
+          <IonTabButton tab="options" href="/options">
+            <IonIcon icon={optionsOutline} />
+            <IonLabel>Options</IonLabel>
           </IonTabButton>
         </IonTabBar>
       </IonTabs>
